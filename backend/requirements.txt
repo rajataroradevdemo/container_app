@@ -1,0 +1,7 @@
+flask==2.1.0
+gunicorn==20.0.4
+flask-mongoengine
+Flask-PyMongo
+PyMongo
+Flask-Cors
+Werkzeug==2.2.2

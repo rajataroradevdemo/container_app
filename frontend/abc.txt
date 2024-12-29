@@ -1,0 +1,54 @@
+D:\dev\react-ui-web-app-main>docker build -f Dockerfile.dev -t tutorialreactapp .
+
+Run Image
+docker run -it -d -p 3000:8081 tutorialui
+
+[ec2-user@ip-172-31-20-79 services]$ docker run -d -e REACT_APP_API_URL=13.201.2
+
+# docker build -t api .
+
+#docker run -p 8000:8000 my-python-image
+#
+#docker run -e 'MONGODB_HOST=13.201.28.112'  -e 'MONGODB_USERNAME=admin' -e 'MONGODB_PASSWORD=password' -p 5000:5000 -d api
+
+
+EC2 Docker
+
+	docker volume create --name mongodb_data
+				
+					
+docker run  -e 'MONGO_INITDB_ROOT_USERNAME=admin' \
+			-e 'MONGO_INITDB_ROOT_PASSWORD=password' \
+			-e 'MONGO_INITDB_DATABASE=tutorialsdb' \
+			-e 'MONGODB_DATA_DIR=/data/db' \
+			--network tutorialapp \
+			-p 27017:27017 \
+			-v mongodb_data:/data/db \
+			mongo:7
+
+docker run -e 'MONGODB_HOST=172.31.30.124' \
+		   -e 'MONGODB_USERNAME=admin' \
+		   -e 'MONGODB_PASSWORD=password' \
+		   -p 5000:5000 -d --network tutorialapp \
+		      api
+
+docker run -d -e REACT_APP_API_URL=3.108.190.233 -p 8081:8081 tutorialui
+
+docker run -d -p 9000:9000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+
+
+env:
+          - name: MONGODB_HOST
+            value: mongo-0.mongo
+          - name: MONGODB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secret
+                key: username
+          - name: MONGODB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secret
+                key: password
+
+
